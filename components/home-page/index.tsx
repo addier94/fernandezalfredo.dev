@@ -9,13 +9,7 @@ import { LatestPosts } from './latest-posts'
 import { BlogLinks } from './links'
 import { TypedBios } from './typed-bios'
 
-export function Home({
-  posts,
-  snippets,
-}: {
-  posts: CoreContent<Blog>[]
-  snippets: CoreContent<Snippet>[]
-}) {
+export function Home({ posts }: { posts: CoreContent<Blog>[] }) {
   return (
     <Container as="div" className="pt-4 lg:pt-12">
       <div className="py-6 md:pb-8 xl:grid xl:grid-cols-3">
@@ -45,7 +39,7 @@ export function Home({
           <ProfileCard />
         </div>
       </div>
-      <LatestPosts posts={posts} snippets={snippets} />
+      <LatestPosts posts={posts} />
       {/* {SITE_METADATA.newsletter?.provider && (
         <div className="flex items-center justify-center py-4 lg:py-10">
           <NewsletterForm />

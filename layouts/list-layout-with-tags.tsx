@@ -1,13 +1,11 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 'use client'
 
-import { clsx } from 'clsx'
 import type { Blog, Snippet } from 'contentlayer/generated'
 import type { CoreContent } from 'pliny/utils/contentlayer'
 import { useState } from 'react'
 import { Tag } from '~/components/blog/tags'
 import { PostCardGridView } from '~/components/blog/post-card-grid-view'
-import { SnippetCard } from '~/components/cards/snippet'
 import { Container } from '~/components/ui/container'
 import { PageHeader } from '~/components/ui/page-header'
 import tagData from '~/json/tag-data.json'
@@ -16,13 +14,10 @@ interface ListLayoutProps {
   title: string
   description: React.ReactNode
   posts: CoreContent<Blog>[]
-  snippets: CoreContent<Snippet>[]
 }
 
-export function ListLayoutWithTags({ title, description, posts, snippets }: ListLayoutProps) {
+export function ListLayoutWithTags({ title, description, posts }: ListLayoutProps) {
   let hasBlogs = posts.length > 0
-  let hasSnippets = snippets.length > 0
-  let [view, setView] = useState<'blogs' | 'snippets'>(hasBlogs ? 'blogs' : 'snippets')
 
   return (
     <Container className="pt-4 lg:pt-12">
@@ -35,35 +30,9 @@ export function ListLayoutWithTags({ title, description, posts, snippets }: List
         <TagsList />
         <div className="py-5 md:py-10">
           <div className="mb-6 flex items-center gap-2 text-2xl font-bold leading-9 tracking-tight text-gray-900 dark:text-gray-100 md:mb-10 md:justify-end md:text-3xl">
-            {hasBlogs && (
-              <button
-                className={clsx(
-                  'underline-offset-4',
-                  view === 'blogs'
-                    ? 'underline'
-                    : 'text-gray-400 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100'
-                )}
-                onClick={() => setView('blogs')}
-              >
-                Blogs
-              </button>
-            )}
-            {hasBlogs && hasSnippets ? <span>/</span> : null}
-            {hasSnippets && (
-              <button
-                className={clsx(
-                  'underline-offset-4',
-                  view === 'snippets'
-                    ? 'underline'
-                    : 'text-gray-400 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100'
-                )}
-                onClick={() => setView('snippets')}
-              >
-                Snippets
-              </button>
-            )}
+            <span>Blogs</span>
           </div>
-          {view === 'blogs' ? (
+          {hasBlogs && (
             <ul className="grid grid-cols-1 gap-x-8 gap-y-12 lg:grid-cols-2">
               {posts.map((post) => (
                 <li key={post.path}>
@@ -71,12 +40,6 @@ export function ListLayoutWithTags({ title, description, posts, snippets }: List
                 </li>
               ))}
             </ul>
-          ) : (
-            <div className="space-y-10">
-              {snippets.map((snippet) => (
-                <SnippetCard snippet={snippet} key={snippet.path} />
-              ))}
-            </div>
           )}
         </div>
       </div>

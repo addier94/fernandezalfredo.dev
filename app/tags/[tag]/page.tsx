@@ -55,7 +55,6 @@ export default function TagPage({ params }: { params: { tag: string } }) {
         </>
       }
       posts={filteredPosts}
-      snippets={filteredSnippets}
     />
   )
 }

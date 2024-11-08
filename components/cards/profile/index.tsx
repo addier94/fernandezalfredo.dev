@@ -1,30 +1,27 @@
 'use client'
 
 import { clsx } from 'clsx'
-import Image from 'next/image'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
+import { Image } from '~/components/ui/image'
 import { SITE_METADATA } from '~/data/site-metadata'
 import { ProfileCardInfo } from './profile-info'
 
 export function ProfileCard() {
-  const ref = useRef<HTMLDivElement>(null)
-  const [style, setStyle] = useState<React.CSSProperties>({})
-  const [hovered, setHovered] = useState(false)
+  let ref = useRef<HTMLDivElement>(null)
+  let [style, setStyle] = useState<React.CSSProperties>({})
 
-  const onMouseMove = useCallback((e: MouseEvent) => {
+  let onMouseMove = useCallback((e: MouseEvent) => {
     if (!ref.current || window.innerWidth < 1280) return
 
-    const { clientX, clientY } = e
-    const { width, height, x, y } = ref.current.getBoundingClientRect()
+    let { clientX, clientY } = e
+    let { width, height, x, y } = ref.current.getBoundingClientRect()
+    let mouseX = Math.abs(clientX - x)
+    let mouseY = Math.abs(clientY - y)
+    let rotateMin = -15
+    let rotateMax = 15
+    let rotateRange = rotateMax - rotateMin
 
-    const mouseX = clientX - x - width / 2
-    const mouseY = clientY - y - height / 2
-
-    const rotateMin = -15
-    const rotateMax = 15
-    const rotateRange = rotateMax - rotateMin
-
-    const rotate = {
+    let rotate = {
       x: rotateMax - (mouseY / height) * rotateRange,
       y: rotateMin + (mouseX / width) * rotateRange,
     }
@@ -34,43 +31,32 @@ export function ProfileCard() {
     })
   }, [])
 
-  const onMouseLeave = useCallback(() => {
+  let onMouseLeave = useCallback(() => {
     setStyle({ transform: 'rotateX(0deg) rotateY(0deg)' })
-    setHovered(false)
-  }, [])
-
-  const onMouseEnter = useCallback(() => {
-    setHovered(true)
   }, [])
 
   useEffect(() => {
-    const { current } = ref
+    let { current } = ref
     if (!current) return
     current.addEventListener('mousemove', onMouseMove)
     current.addEventListener('mouseleave', onMouseLeave)
-    current.addEventListener('mouseenter', onMouseEnter)
-
     return () => {
       if (!current) return
       current.removeEventListener('mousemove', onMouseMove)
       current.removeEventListener('mouseleave', onMouseLeave)
-      current.removeEventListener('mouseenter', onMouseEnter)
     }
-  }, [onMouseMove, onMouseLeave, onMouseEnter])
+  }, [onMouseLeave, onMouseMove])
 
   return (
     <div
-      className={clsx(
-        'z-10 mb-8 transition-all duration-300 ease-out md:mb-0',
-        hovered ? 'scale-105 shadow-lg' : 'scale-100 shadow-md'
-      )}
+      className="z-10 mb-8 scale-100 transition-all duration-200 ease-out hover:z-50 md:mb-0 md:hover:scale-[1.15]"
       style={{ perspective: '600px' }}
       ref={ref}
     >
       <div
         style={style}
         className={clsx(
-          'flex flex-col overflow-hidden transition-transform duration-300 ease-out md:rounded-lg',
+          'flex flex-col overflow-hidden transition-all duration-200 ease-out md:rounded-lg',
           'bg-white shadow-demure dark:bg-dark dark:shadow-mondegreen',
           'outline outline-1 outline-gray-100 dark:outline-gray-600'
         )}
@@ -81,16 +67,13 @@ export function ProfileCard() {
           width={550}
           height={350}
           style={{
-            objectPosition: '50% 20%',
-            objectFit: 'cover',
-            width: '100%',
-            aspectRatio: '17/14',
+            objectPosition: '50% 15%',
+            aspectRatio: '1/1',
           }}
-          priority
+          loading="eager"
         />
-
         <ProfileCardInfo />
-        <span className="h-1.5 bg-gradient-to-r from-green-300 via-pink-500 to-purple-600"></span>
+        <span className="h-1.5 bg-gradient-to-r from-green-300 via-blue-500 to-purple-600" />
       </div>
     </div>
   )

@@ -7,7 +7,7 @@ export const SITE_METADATA = {
   language: 'en-us',
   theme: 'system', // system, dark or light
   siteUrl: 'https://www.fernandezalfreddo.dev',
-  siteRepo: 'https://github.com/hta218/leohuynh.dev',
+  siteRepo: 'https://github.com/addier94/fernandezalfredo.dev',
   siteLogo: `${process.env.BASE_PATH || ''}/static/thumbnails/logo.jpeg`,
   socialBanner: `${process.env.BASE_PATH || ''}/static/images/twitter-card.jpeg`,
   email: 'hi@alfredofernandez.dev',
@@ -16,13 +16,13 @@ export const SITE_METADATA = {
   facebook: 'https://facebook.com/addier94',
   youtube: 'https://www.youtube.com/@addier94',
   linkedin: 'https://www.linkedin.com/in/addier94',
-  threads: 'https://www.threads.net/hta218_',
+  threads: 'https://www.threads.net',
   instagram: 'https://www.instagram.com/addier94',
   locale: 'en-US',
   stickyNav: true,
-  goodreadsBookshelfUrl: 'https://www.goodreads.com/review/list/179720035-leo-huynh',
-  goodreadsFeedUrl: 'https://www.goodreads.com/review/list_rss/179720035',
-  imdbRatingsList: 'https://www.imdb.com/user/ur154483197/ratings/?view=grid',
+  // goodreadsBookshelfUrl: 'https://www.goodreads.com/review/list/179720035-leo-huynh',
+  // goodreadsFeedUrl: 'https://www.goodreads.com/review/list_rss/179720035',
+  // imdbRatingsList: 'https://www.imdb.com/user/ur154483197/ratings/?view=grid',
   analyticsUrl: 'https://analytics.leohuynh.dev/share/c9ErglxqzY5CQJ8g/leohuynh.dev',
   analytics: {
     umamiAnalytics: {

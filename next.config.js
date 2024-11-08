@@ -1,4 +1,5 @@
 const { withContentlayer } = require('next-contentlayer2')
+const { hostname } = require('os')
 
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
@@ -84,6 +85,14 @@ module.exports = () => {
         {
           protocol: 'https',
           hostname: 'm.media-amazon.com', // IMDB movie posters
+        },
+        {
+          protocol: 'https',
+          hostname: 'ecommerce-product-cart878.netlify.app',
+        },
+        {
+          protocol: 'https',
+          hostname: 'raw.githubusercontent.com',
         },
       ],
       unoptimized,

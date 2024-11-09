@@ -1,5 +1,5 @@
 import type { CoreContent } from 'pliny/utils/contentlayer'
-import type { Blog, Snippet } from '~/.contentlayer/generated'
+import type { Blog } from '~/.contentlayer/generated'
 import { ProfileCard } from '~/components/cards/profile'
 import { Container } from '~/components/ui/container'
 import { Twemoji } from '~/components/ui/twemoji'
